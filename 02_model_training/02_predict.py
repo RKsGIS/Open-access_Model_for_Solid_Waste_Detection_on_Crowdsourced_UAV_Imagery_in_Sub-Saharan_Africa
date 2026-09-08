@@ -25,7 +25,7 @@ Usage
     # Single scene:
     python 02_model_training/02_predict.py \
         --tif   data/imagery/59e62b8a3d6412ef72209d69.tif \
-        --tiles data/tiles/59e62b8a3d6412ef72209d69_tiles.gpkg \
+        --tiles data/tiles/Africa__Tanzania__Bukoba__59e62b8a3d6412ef72209d69__tiles.gpkg \
         --model 02_model_training/checkpoints/best.pt
 
 Requirements

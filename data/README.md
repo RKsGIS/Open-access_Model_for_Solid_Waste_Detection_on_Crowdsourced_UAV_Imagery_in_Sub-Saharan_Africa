@@ -20,7 +20,12 @@ data/
 |   +-- <oam_id>.tif
 |
 +-- tiles/                     <- tile grids, one GPKG per scene
+<<<<<<< HEAD
 |   +-- <Country_city_oam_id>_tiles.gpkg
+=======
+|   +-- fAIr-labels            <- labels from fAIr project
+|   +-- <continent>__<country>__<city>__<oam_id>__tiles.gpkg
+>>>>>>> b193ee7 (continent and fairlabel)
 |
 +-- dataset/                   <- YOLO dataset for training
 |   +-- train/  waste/  background/
@@ -74,12 +79,12 @@ Cloud-optimised GeoTIFFs downloaded from OAM. Where a single AOI has multiple ov
 
 ---
 
-### `tiles/<oam_id>_tiles.gpkg`
+### `tiles/<continent>__<country>__<city>__<oam_id>__tiles.gpkg`
 
 **Produced by:** `01_data_acquisition_preprocessing/02_download_and_tile.py`  
 **Extended by:** `02_model_training/02_predict.py`
 
-One GeoPackage per scene. Each row represents one 5 × 5 m tile. Some columns are added in subsequent pipeline steps.
+One GeoPackage per scene. Filenames use `__` (double underscore) to separate the continent, country, city, and OAM scene ID fields, since country/city names themselves may contain single underscores (e.g. `Africa__Sao_Tome_and_Principe__Praia_Gamboa__59e62b943d6412ef7220a28f__tiles.gpkg`). Each row represents one 5 × 5 m tile. Some columns are added in subsequent pipeline steps.
 
 | Column | Type | Added by | Description |
 |---|---|---|---|
@@ -93,7 +98,7 @@ One GeoPackage per scene. Each row represents one 5 × 5 m tile. Some columns ar
 
 
 
-> **Manual step:** open each `_tiles.gpkg` in QGIS and set the `label` column for ~100 waste and ~100 background tiles per region before running `03_create_yolo_dataset.py`.
+> **Manual step:** open each `<continent>__<country>__<city>__<oam_id>__tiles.gpkg` in QGIS and set the `label` column for ~100 waste and ~100 background tiles per region before running `03_create_yolo_dataset.py`.
 
 ---
 

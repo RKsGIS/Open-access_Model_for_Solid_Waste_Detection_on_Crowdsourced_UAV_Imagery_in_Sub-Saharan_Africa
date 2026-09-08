@@ -73,7 +73,7 @@ waste-detection-ssa/
 |   +-- oam_catalog_summary.csv        <- human-readable summary with location columns
 |   +-- AOI.gpkg                       <- final per-AOI metrics (output of 03_analysis)
 |   +-- imagery/                       <- downloaded GeoTIFFs (gitignored)
-|   +-- tiles/                         <- tile grids: {oam_id}_tiles.gpkg
+|   +-- tiles/                         <- tile grids: Africa__{country}__{city}__{oam_id}__tiles.gpkg
 |   |                                     columns: tile_id, oam_id, row, col,
 |   |                                              filename, label [, pred_class,
 |   |                                              confidence]
@@ -138,7 +138,7 @@ All imagery is sourced from OpenAerialMap under contributors' respective open li
 
 ### Labels
 
-Approximately 200 tiles per region were labeled manually in QGIS: ~100 *waste* and ~100 *background*. Labels are stored in the `label` column of `data/tiles/<oam_id>_tiles.gpkg`. The dataset is split 70 / 15 / 15% (train / val / test) per region using a fixed random seed.
+Approximately 200 tiles per region were labeled manually in QGIS: ~100 *waste* and ~100 *background*. Labels are stored in the `label` column of `data/tiles/Africa__<country>__<city>__<oam_id>__tiles.gpkg`. The dataset is split 70 / 15 / 15% (train / val / test) per region using a fixed random seed.
 
 <!-- | Statistic | Value |
 |---|---|
@@ -227,7 +227,7 @@ python 01_data_acquisition_preprocessing/02_download_and_tile.py \
 
 > **Optional:** If downloaded scenes overlap, merge them in QGIS before tiling (*Raster → Miscellaneous → Merge*). Save the merged output as `<oam_id>_merged.tif` in `data/imagery/`.
 
-> **Manual step:** Open each `data/tiles/<oam_id>_tiles.gpkg` in QGIS and set the `label` column (`1` = waste, `0` = background) for approximately 100 tiles per class per region.
+> **Manual step:** Open each `data/tiles/Africa__<country>__<city>__<oam_id>__tiles.gpkg` in QGIS and set the `label` column (`1` = waste, `0` = background) for approximately 100 tiles per class per region.
 
 | tile_id | oam_id | label | geometry |
 |---|---|---|---|
@@ -237,7 +237,7 @@ python 01_data_acquisition_preprocessing/02_download_and_tile.py \
 
 Set `label = 1` for tiles containing visible waste, `label = 0` for clean background. Tiles with a blank label are excluded from dataset creation.
 
-**Outputs:** `data/imagery/<oam_id>.tif` · `data/tiles/<oam_id>_tiles.gpkg`
+**Outputs:** `data/imagery/<oam_id>.tif` · `data/tiles/Africa__<country>__<city>__<oam_id>__tiles.gpkg`
 
 ---
 
